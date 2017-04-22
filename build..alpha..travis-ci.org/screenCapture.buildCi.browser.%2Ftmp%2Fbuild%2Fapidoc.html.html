@@ -1,0 +1,195 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/postcss/postcss-reporter">postcss-reporter (v3.0.0)</a>
+</h1>
+<h4>Log PostCSS messages in the console</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.postcss-reporter">module postcss-reporter</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postcss-reporter.postcss-reporter">
+            function <span class="apidocSignatureSpan"></span>postcss-reporter
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postcss-reporter.process">
+            function <span class="apidocSignatureSpan">postcss-reporter.</span>process
+            <span class="apidocSignatureSpan">(root, opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">postcss-reporter.</span>util</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.postcss-reporter.util">module postcss-reporter.util</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postcss-reporter.util.getLocation">
+            function <span class="apidocSignatureSpan">postcss-reporter.util.</span>getLocation
+            <span class="apidocSignatureSpan">(message)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.postcss-reporter" id="apidoc.module.postcss-reporter">module postcss-reporter</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.postcss-reporter.postcss-reporter" id="apidoc.element.postcss-reporter.postcss-reporter">
+        function <span class="apidocSignatureSpan"></span>postcss-reporter
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function creator() {
+  var transformer = initializer.apply(undefined, arguments);
+  transformer.postcssPlugin = name;
+  transformer.postcssVersion = new _processor2.default().version;
+  return transformer;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postcss-reporter.process" id="apidoc.element.postcss-reporter.process">
+        function <span class="apidocSignatureSpan">postcss-reporter.</span>process
+        <span class="apidocSignatureSpan">(root, opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">process = function (root, opts) {
+  return postcss([creator(opts)]).process(root, opts);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.postcss-reporter.util" id="apidoc.module.postcss-reporter.util">module postcss-reporter.util</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.postcss-reporter.util.getLocation" id="apidoc.element.postcss-reporter.util.getLocation">
+        function <span class="apidocSignatureSpan">postcss-reporter.util.</span>getLocation
+        <span class="apidocSignatureSpan">(message)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getLocation = function (message) {
+  var messageNode = message.node;
+
+  var location = {
+    line: message.line,
+    column: message.column,
+  };
+
+  var messageInput = _.get(messageNode, 'source.input');
+
+  if (!messageInput) return location;
+
+  var originLocation = messageInput.origin &amp;&amp; messageInput.origin(message.line, message.column)
+  if (originLocation) return originLocation
+
+  location.file = messageInput.file || messageInput.id;
+  return location;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    orderedMessages.forEach(function(w) {
+output += messageToString(w) + '\n';
+    });
+
+    return output;
+
+    function messageToString(message) {
+var location = util.<span class="apidocCodeKeywordSpan">getLocation</span>(message);
+var str = '';
+
+if (location.line) {
+  str += chalk.bold(location.line);
+}
+
+if (location.column) {
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
